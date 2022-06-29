@@ -1,8 +1,9 @@
-
 // Context
 import UserProvider from "./context/userContext";
 import AppProvider from "./context/appContext";
 import { MantineProvider, AppShell } from '@mantine/core'
+
+// Components
 import NavbarContent from "./components/NavbarContent";
 import HeaderContent from "./components/HeaderContent";
 import Content from "./components/Content";
