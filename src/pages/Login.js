@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { useForm } from '@mantine/form';
 import { TextInput, Button, Group, Box, PasswordInput, PasswordInputProps, Anchor } from '@mantine/core';
 import axios from 'axios';
+import { useApp } from '../context/appContext';
 
 // use loading state
 
 
 export default function Login() {
+
+    const { appURL, regex } = useApp()
 
     const [loading, setLoading] = useState(false)
 
@@ -17,14 +20,13 @@ export default function Login() {
         },
 
         validate: {
-            email: (value) => (/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i.test(value) ? null : 'Invalid email'),
+            email: (value) => (regex.email.test(value) ? null : 'Invalid email'),
         },
     });
 
     const onSubmit = data => {
 
         setLoading(true)
-        console.log(data);
 
         axios.post('http://localhost:3001/users/login', data)
             .then(

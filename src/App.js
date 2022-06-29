@@ -3,8 +3,7 @@ import Login from "./pages/Signup";
 import Signup from "./pages/Login"
 // Context
 import UserProvider from "./context/userContext";
-
-
+import AppProvider from "./context/appContext";
 import { MantineProvider } from '@mantine/core'
 
 
@@ -18,13 +17,15 @@ function App() {
         // colorScheme: 'dark'
       }}
     >
-      <UserProvider>
-        <div className="App">
-          Hello There!
-          <Login />
-          <Signup />
-        </div>
-      </UserProvider>
+      <AppProvider>
+        <UserProvider>
+          <div className="App">
+            Hello There!
+            <Login />
+            <Signup />
+          </div>
+        </UserProvider>
+      </AppProvider>
     </MantineProvider>
   );
 }
