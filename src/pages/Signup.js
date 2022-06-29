@@ -2,9 +2,15 @@ import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-// Split
+// x Create Account 
 // Frontend validation
 // Backend validation
+// Login
+// Frontend validation
+// Backend validation
+// User Page
+// Page Direct
+// Themeing
 
 export default function Signup() {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -26,6 +32,12 @@ export default function Signup() {
   }
   console.log("Errors:", errors);
 
+  if (errors.username) {
+    if (errors.username.type === 'required') {
+      errors.username.message = 'Username is required'
+    }
+  }
+
   return (
     <div>
       <h1>Create Account</h1>
@@ -33,11 +45,13 @@ export default function Signup() {
       {/* {errors.password?.type === 'required' && "Password is required"} */}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="First name" {...register("firstName", { required: true, maxLength: 100 })} />
-        <input type="text" placeholder="Last name" {...register("lastName", { required: true, maxLength: 100 })} />
         <input type="text" placeholder="Username" {...register("username", { required: true, maxLength: 36 })} />
+        {errors.username?.message}
+
         <input type="text" placeholder="Email" {...register("email", { required: true, pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/i })} />
+
         <input type="password" placeholder="Pasword" {...register("password", { required: true, min: 8, maxLength: 256, pattern: /^.{24,}|(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/i })} />
+
         <input type="submit" />
       </form>
     </div>
