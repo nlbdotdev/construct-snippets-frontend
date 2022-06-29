@@ -1,11 +1,11 @@
-// Pages
-import Login from "./pages/Signup";
-import Signup from "./pages/Login"
+
 // Context
 import UserProvider from "./context/userContext";
 import AppProvider from "./context/appContext";
-import { MantineProvider } from '@mantine/core'
-
+import { MantineProvider, AppShell } from '@mantine/core'
+import NavbarContent from "./components/NavbarContent";
+import HeaderContent from "./components/HeaderContent";
+import Content from "./components/Content";
 
 function App() {
   return (
@@ -19,15 +19,20 @@ function App() {
     >
       <AppProvider>
         <UserProvider>
-          <div className="App">
-            Hello There!
-            <Login />
-            <Signup />
-          </div>
+          <AppShell
+            padding="md"
+            navbar={<NavbarContent />}
+            header={<HeaderContent />}
+            styles={(theme) => ({
+              main: { backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0] },
+            })}
+          >
+            <Content />
+          </AppShell>
         </UserProvider>
       </AppProvider>
     </MantineProvider>
-  );
+  )
 }
 
 export default App;
