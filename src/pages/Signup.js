@@ -5,12 +5,6 @@ import { useForm } from 'react-hook-form';
 // x Create Account 
 // Frontend validation
 // Backend validation
-// Login
-// Frontend validation
-// Backend validation
-// User Page
-// Page Direct
-// Themeing
 
 // modularize axios function into userContext?
 // No keep async functions local, get url from app provider, then set user context data

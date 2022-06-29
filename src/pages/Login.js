@@ -1,53 +1,92 @@
 import React, { useState } from 'react'
 import { useForm } from '@mantine/form';
-import { TextInput, Button, Group, Box, PasswordInput, PasswordInputProps, Anchor } from '@mantine/core';
+import { TextInput, Button, Group, Box, PasswordInput, PasswordInputProps, Anchor, LoadingOverlay, Alert } from '@mantine/core';
 import axios from 'axios';
 import { useApp } from '../context/appContext';
+import { AlertCircle } from 'tabler-icons-react'
 
-// use loading state
-
+// x Login
+// x Frontend validation
+// Backend validation
+// Use loading state
+// User Page
+// Page Direct
 
 export default function Login() {
 
+    // Vars from appContext
     const { appURL, regex } = useApp()
 
+    // Login vars
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
+    // Mantine form: values and validation
     const form = useForm({
         initialValues: {
             email: '',
             password: '',
         },
 
+        // Email validation through mantine form test and appContext regex
         validate: {
             email: (value) => (regex.email.test(value) ? null : 'Invalid email'),
         },
     });
 
-    const onSubmit = data => {
+    // Form submission with axios and appURL
+    const onSubmit = (data) => {
 
+        // Reset login vars
         setLoading(true)
+        setError(false)
+        setErrorMessage('')
 
-        axios.post('http://localhost:3001/users/login', data)
-            .then(
-                // if status code
-                response => {
-                    if (response.status === 200) {
-                        console.log('SUCCESS: ', response.data)
-                    } else {
-                        console.log('Something went wrong.', response)
-                    }
+        // User login route
+        axios.post(`${appURL}users/login`, data)
+            // Login success
+            .then(response => {
+                setLoading(false)
+                if (response.status === 200) {
+                    console.log('SUCCESS: ', response.data)
+                } else {
+                    console.log('Login Error:', error.response.data)
+                    setError(true)
+                    setErrorMessage("Something went wrong, contact support")
                 }
+            }
             )
-            .catch(e => console.log('CAUGHT ERROR', e.response.data.error))
+            // Login error handling
+            .catch(error => {
+                setLoading(false)
+                setError(true)
+                if (error.response.data.type === 'nomatch') {
+                    setErrorMessage("No user found for this email/password")
+                } else if (error.response.data.error.email) {
+                    setErrorMessage("Email is invalid")
+                } else {
+                    console.log('Login Error:', error.response.data)
+                    setErrorMessage("Something went wrong, contact support")
+                }
+            })
     }
 
-
-
     return (
-        <Box sx={{ maxWidth: 300 }} mx="auto">
+        <Box sx={{ maxWidth: 400 }} mx="auto">
+
             <h1>Login Page</h1>
+            <LoadingOverlay visible={loading} />
+
             <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+
+
+                {
+                    error &&
+                    <Alert icon={<AlertCircle size={32} />} title="Error!" color="red" mt='sm' align="left">
+                        {errorMessage}
+                    </Alert>
+                }
                 <TextInput
                     required
                     label="Email"
@@ -62,10 +101,15 @@ export default function Login() {
                     {...form.getInputProps('password')}
                 />
 
+
+
                 <Group position="right" mt="md">
-                    <Button type="submit" loading={loading}>Submit</Button>
+                    <Button type="submit">Submit</Button>
                 </Group>
+
+
             </form>
+
         </Box>
     )
 }
