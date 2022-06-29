@@ -12,6 +12,9 @@ import { useForm } from 'react-hook-form';
 // Page Direct
 // Themeing
 
+// modularize axios function into userContext?
+// No keep async functions local, get url from app provider, then set user context data
+
 export default function Signup() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
