@@ -4,7 +4,7 @@ import { Text, } from '@mantine/core';
 
 export default function HeaderContent() {
     return (
-        <Group p="md">
+        <Group>
             <Text>Application header</Text>
         </Group>
     )
