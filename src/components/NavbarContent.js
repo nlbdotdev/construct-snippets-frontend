@@ -72,9 +72,9 @@ const useStyles = createStyles((theme, _params, getRef) => {
 });
 
 const data = [
-    { link: '', label: 'Notifications', icon: BellRinging },
-    { link: '', label: 'Billing', icon: Receipt2 },
-    { link: '', label: 'Security', icon: Fingerprint },
+    { link: '', label: 'Home', icon: BellRinging },
+    { link: '', label: 'My Stuff', icon: Receipt2 },
+    { link: '', label: 'Favorites', icon: Fingerprint },
     { link: '', label: 'SSH Keys', icon: Key },
     { link: '', label: 'Databases', icon: DatabaseImport },
     { link: '', label: 'Authentication', icon: TwoFA },
@@ -103,10 +103,10 @@ export default function NavbarContent({ opened }) {
     return (
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 350 }} className={classes.navbar}>
             <Navbar.Section grow>
-
                 {links}
             </Navbar.Section>
 
+        {/* Replace w/ username */}
             <Navbar.Section className={classes.footer}>
                 <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
                     <SwitchHorizontal className={classes.linkIcon} />

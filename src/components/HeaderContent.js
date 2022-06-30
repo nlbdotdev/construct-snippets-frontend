@@ -5,7 +5,7 @@ import { Text, } from '@mantine/core';
 export default function HeaderContent() {
     return (
         <Group>
-            <Text>Application header</Text>
+            <h1>Construct Snippets</h1>
         </Group>
     )
 }

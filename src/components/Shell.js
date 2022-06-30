@@ -30,13 +30,12 @@ export default function Shell() {
 
       // NAVBAR - Hidden when too small, unless header burger clicked, then fills page
       navbar={
-
         <NavbarContent opened={opened}/>
       }
 
       // HEADER - converts to burger that opens navbar when too small
       header={
-        <Header height={70} p="md">
+        <Header height={60} p="md">
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
