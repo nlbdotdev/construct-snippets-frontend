@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createStyles, Navbar, Group, Code } from '@mantine/core';
+import { createStyles, Navbar, Group, Code, Text } from '@mantine/core';
 import {
     BellRinging,
     Fingerprint,
@@ -11,6 +11,9 @@ import {
     SwitchHorizontal,
     Logout,
 } from 'tabler-icons-react';
+import { Link } from 'react-router-dom';
+
+
 
 const useStyles = createStyles((theme, _params, getRef) => {
     const icon = getRef('icon');
@@ -72,10 +75,10 @@ const useStyles = createStyles((theme, _params, getRef) => {
 });
 
 const data = [
-    { link: '', label: 'Home', icon: BellRinging },
-    { link: '', label: 'My Stuff', icon: Receipt2 },
-    { link: '', label: 'Favorites', icon: Fingerprint },
-    { link: '', label: 'SSH Keys', icon: Key },
+    { link: '/', label: 'Home', icon: BellRinging },
+    { link: '/user', label: 'My Stuff', icon: Receipt2 },
+    { link: '/404', label: 'Favorites', icon: Fingerprint },
+    { link: '/user/new', label: 'SSH Keys', icon: Key },
     { link: '', label: 'Databases', icon: DatabaseImport },
     { link: '', label: 'Authentication', icon: TwoFA },
     { link: '', label: 'Other Settings', icon: Settings },
@@ -86,18 +89,18 @@ export default function NavbarContent({ opened }) {
     const [active, setActive] = useState('Billing');
 
     const links = data.map((item) => (
-        <a
-            className={cx(classes.link, { [classes.linkActive]: item.label === active })}
-            href={item.link}
-            key={item.label}
-            onClick={(event) => {
-                event.preventDefault();
-                setActive(item.label);
-            }}
-        >
-            <item.icon className={classes.linkIcon} />
-            <span>{item.label}</span>
-        </a>
+
+        <Link to={item.link} key={item.label}>
+            <div
+                className={cx(classes.link, { [classes.linkActive]: item.label === active })}
+                onClick={(event) => {
+                    setActive(item.label);
+                }}
+            >
+                <item.icon className={classes.linkIcon} />
+                <span>{item.label}</span>
+            </div>
+        </Link>
     ));
 
     return (
@@ -106,7 +109,7 @@ export default function NavbarContent({ opened }) {
                 {links}
             </Navbar.Section>
 
-        {/* Replace w/ username */}
+            {/* Replace w/ username */}
             <Navbar.Section className={classes.footer}>
                 <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
                     <SwitchHorizontal className={classes.linkIcon} />

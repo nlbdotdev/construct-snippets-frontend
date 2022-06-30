@@ -8,6 +8,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 
+// Content
 import NavbarContent from './NavbarContent';
 import HeaderContent from './HeaderContent';
 import Content from './Content';

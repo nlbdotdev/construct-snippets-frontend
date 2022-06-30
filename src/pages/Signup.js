@@ -28,6 +28,8 @@ export default function Signup() {
       )
       .catch(e => console.log('CAUGHT ERROR', e.response.data.error))
   }
+
+  
   console.log("Errors:", errors);
 
   if (errors.username) {
