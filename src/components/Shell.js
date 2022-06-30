@@ -3,9 +3,6 @@ import {
   AppShell,
   Navbar,
   Header,
-  Footer,
-  Aside,
-  Text,
   MediaQuery,
   Burger,
   useMantineTheme,
@@ -31,38 +28,17 @@ export default function Shell() {
       asideOffsetBreakpoint="sm"
       fixed
 
-      // NAVBAR
-      // Hidden when too small, unless header burger clicked, then fills page
+      // NAVBAR - Hidden when too small, unless header burger clicked, then fills page
       navbar={
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-
-    <NavbarContent/>
+          <NavbarContent />
         </Navbar>
       }
 
-      // ASIDE
-      // Hidden when too small
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
-      }
-
-      // FOOTER
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
-
-      // HEADER
-      // Converts to burger that opens navbar when too small
+      // HEADER - converts to burger that opens navbar when too small
       header={
         <Header height={70} p="md">
           <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-          DAb
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
@@ -72,8 +48,6 @@ export default function Shell() {
                 mr="xl"
               />
             </MediaQuery>
-            HEADER
-            
             <HeaderContent />
           </div>
         </Header>
