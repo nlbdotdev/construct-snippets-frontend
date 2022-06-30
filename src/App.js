@@ -7,6 +7,7 @@ import { MantineProvider, AppShell } from '@mantine/core'
 import NavbarContent from "./components/NavbarContent";
 import HeaderContent from "./components/HeaderContent";
 import Content from "./components/Content";
+import Shell from "./components/Shell";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
     >
       <AppProvider>
         <UserProvider>
-          <AppShell
+        <Shell/>
+          {/* <AppShell
             padding="md"
             navbar={<NavbarContent />}
             header={<HeaderContent />}
@@ -29,7 +31,7 @@ function App() {
             })}
           >
             <Content />
-          </AppShell>
+          </AppShell> */}
         </UserProvider>
       </AppProvider>
     </MantineProvider>
