@@ -30,9 +30,8 @@ export default function Shell() {
 
       // NAVBAR - Hidden when too small, unless header burger clicked, then fills page
       navbar={
-        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-          <NavbarContent />
-        </Navbar>
+
+        <NavbarContent opened={opened}/>
       }
 
       // HEADER - converts to burger that opens navbar when too small

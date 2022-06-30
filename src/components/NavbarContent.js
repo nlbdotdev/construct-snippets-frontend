@@ -1,111 +1,122 @@
-import React from 'react';
-import { Navbar, Group, Code, ScrollArea, createStyles } from '@mantine/core';
+import React, { useState } from 'react';
+import { createStyles, Navbar, Group, Code } from '@mantine/core';
 import {
-    Notes,
-    CalendarStats,
-    Gauge,
-    PresentationAnalytics,
-    FileAnalytics,
-    Adjustments,
-    Lock,
+    BellRinging,
+    Fingerprint,
+    Key,
+    Settings,
+    TwoFA,
+    DatabaseImport,
+    Receipt2,
+    SwitchHorizontal,
+    Logout,
 } from 'tabler-icons-react';
-import UserButton from './UserButton.js';
-import { LinksGroup, } from './NavbarLinksGroup.tsx';
-import Logo from './Logo';
 
-const mockdata = [
-    { label: 'Dashboard', icon: Gauge, link: '/'},
-    {
-        label: 'Market news',
-        icon: Notes,
-        initiallyOpened: true,
-        links: [
-            { label: 'Overview', link: '/' },
-            { label: 'Forecasts', link: '/' },
-            { label: 'Outlook', link: '/' },
-            { label: 'Real time', link: '/' },
-        ],
-    },
-    {
-        label: 'Releases',
-        icon: CalendarStats,
-        links: [
-            { label: 'Upcoming releases', link: '/' },
-            { label: 'Previous releases', link: '/' },
-            { label: 'Releases schedule', link: '/' },
-        ],
-    },
-    { label: 'Analytics', icon: PresentationAnalytics },
-    { label: 'Contracts', icon: FileAnalytics },
-    { label: 'Settings', icon: Adjustments },
-    {
-        label: 'Security',
-        icon: Lock,
-        links: [
-            { label: 'Enable 2FA', link: '/' },
-            { label: 'Change password', link: '/' },
-            { label: 'Recovery codes', link: '/' },
-        ],
-    },
+const useStyles = createStyles((theme, _params, getRef) => {
+    const icon = getRef('icon');
+    return {
+        navbar: {
+            backgroundColor: theme.colors[theme.primaryColor][6],
+        },
+
+        version: {
+            backgroundColor: theme.colors[theme.primaryColor][7],
+            color: theme.white,
+            fontWeight: 700,
+        },
+
+        header: {
+            paddingBottom: theme.spacing.md,
+            marginBottom: theme.spacing.md * 1.5,
+            borderBottom: `1px solid ${theme.colors[theme.primaryColor][7]}`,
+        },
+
+        footer: {
+            paddingTop: theme.spacing.md,
+            marginTop: theme.spacing.md,
+            borderTop: `1px solid ${theme.colors[theme.primaryColor][7]}`,
+        },
+
+        link: {
+            ...theme.fn.focusStyles(),
+            display: 'flex',
+            alignItems: 'center',
+            textDecoration: 'none',
+            fontSize: theme.fontSizes.sm,
+            color: theme.white,
+            padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
+            borderRadius: theme.radius.sm,
+            fontWeight: 500,
+
+            '&:hover': {
+                backgroundColor: theme.colors[theme.primaryColor][5],
+            },
+        },
+
+        linkIcon: {
+            ref: icon,
+            color: theme.white,
+            opacity: 0.75,
+            marginRight: theme.spacing.sm,
+        },
+
+        linkActive: {
+            '&, &:hover': {
+                backgroundColor: theme.colors[theme.primaryColor][7],
+                [`& .${icon}`]: {
+                    opacity: 0.9,
+                },
+            },
+        },
+    };
+});
+
+const data = [
+    { link: '', label: 'Notifications', icon: BellRinging },
+    { link: '', label: 'Billing', icon: Receipt2 },
+    { link: '', label: 'Security', icon: Fingerprint },
+    { link: '', label: 'SSH Keys', icon: Key },
+    { link: '', label: 'Databases', icon: DatabaseImport },
+    { link: '', label: 'Authentication', icon: TwoFA },
+    { link: '', label: 'Other Settings', icon: Settings },
 ];
 
-const useStyles = createStyles((theme) => ({
-    navbar: {
-        backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
-        paddingBottom: 0,
-    },
+export default function NavbarContent({ opened }) {
+    const { classes, cx } = useStyles();
+    const [active, setActive] = useState('Billing');
 
-    header: {
-        padding: theme.spacing.md,
-        paddingTop: 0,
-        marginLeft: -theme.spacing.md,
-        marginRight: -theme.spacing.md,
-        color: theme.colorScheme === 'dark' ? theme.white : theme.black,
-        borderBottom: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-            }`,
-    },
-
-    links: {
-        marginLeft: -theme.spacing.md,
-        marginRight: -theme.spacing.md,
-    },
-
-    linksInner: {
-        paddingTop: theme.spacing.xl,
-        paddingBottom: theme.spacing.xl,
-    },
-
-    footer: {
-        marginLeft: -theme.spacing.md,
-        marginRight: -theme.spacing.md,
-        borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[3]
-            }`,
-    },
-}));
-
-export default function NavbarContent() {
-    const { classes } = useStyles();
-    const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+    const links = data.map((item) => (
+        <a
+            className={cx(classes.link, { [classes.linkActive]: item.label === active })}
+            href={item.link}
+            key={item.label}
+            onClick={(event) => {
+                event.preventDefault();
+                setActive(item.label);
+            }}
+        >
+            <item.icon className={classes.linkIcon} />
+            <span>{item.label}</span>
+        </a>
+    ));
 
     return (
-        <Navbar height={800} width={{ sm: 300 }} p="md" className={classes.navbar}>
-            <Navbar.Section className={classes.header}>
-                <Group position="apart">
-                    <Logo width={120} />
-                    <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
-                </Group>
-            </Navbar.Section>
+        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 350 }} className={classes.navbar}>
+            <Navbar.Section grow>
 
-            <Navbar.Section grow className={classes.links} component={ScrollArea}>
-                <div className={classes.linksInner}>{links}</div>
+                {links}
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
-                <UserButton
-                    image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-                    name="Ann Nullpointer"
-                    email="anullpointer@yahoo.com"
-                />
+                <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+                    <SwitchHorizontal className={classes.linkIcon} />
+                    <span>Change account</span>
+                </a>
+
+                <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
+                    <Logout className={classes.linkIcon} />
+                    <span>Logout</span>
+                </a>
             </Navbar.Section>
         </Navbar>
     );
