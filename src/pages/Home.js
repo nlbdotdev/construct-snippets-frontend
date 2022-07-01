@@ -9,6 +9,7 @@ export default function Home() {
       <p>Github link and attribution, kofi, partners if possible, like used by</p>
       <p>Top Snippets</p>
       <p>Stats about stuff, total users, snippets, downloads, etc</p>
+      <button>Login Button (Get Started) / (Create an Account)</button>
     </div>
   )
 }

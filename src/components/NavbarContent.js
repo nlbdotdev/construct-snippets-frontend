@@ -76,9 +76,9 @@ const data = [
     { link: '/', label: 'Home', icon: BellRinging },
     { link: '/user', label: 'My Stuff', icon: Receipt2 },
     { link: '/404', label: 'Favorites', icon: Fingerprint },
-    { link: '/user/new', label: 'SSH Keys', icon: Key },
-    { link: '', label: 'Databases', icon: DatabaseImport },
-    { link: '', label: 'Authentication', icon: TwoFA },
+    { link: '/login', label: 'login', icon: Key },
+    { link: '/signup', label: 'signup', icon: DatabaseImport },
+    { link: '/authentication', label: 'access', icon: TwoFA },
     { link: '', label: 'Other Settings', icon: Settings },
 ];
 
