@@ -7,8 +7,7 @@ import Home from '../pages/Home'
 import NotFound from '../pages/NotFound'
 
 // Router
-import { Link, Route, Routes } from 'react-router-dom'
-import { Text } from '@mantine/core'
+import { Route, Routes } from 'react-router-dom'
 
 
 export default function Content() {

@@ -13,8 +13,6 @@ import {
 } from 'tabler-icons-react';
 import { Link } from 'react-router-dom';
 
-
-
 const useStyles = createStyles((theme, _params, getRef) => {
     const icon = getRef('icon');
     return {
