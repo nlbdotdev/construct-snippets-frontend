@@ -132,7 +132,7 @@ export function Authentication(PaperProps) {
             </Text>
 
             <Group grow mb="lg" mt="md" spacing="xs">
-              <GoogleButton radius="xl" fullwidth>Google</GoogleButton>
+              <GoogleButton radius="xl">Google</GoogleButton>
               <GithubButton radius='xl'>Github</GithubButton>
             </Group>
           </div>
@@ -146,7 +146,7 @@ export function Authentication(PaperProps) {
             </Text>
 
             <Stack p="md">
-              <GoogleButton radius="xl" fullwidth>Google</GoogleButton>
+              <GoogleButton radius="xl">Google</GoogleButton>
               <GithubButton radius='xl'>Github</GithubButton>
             </Stack>
           </div>

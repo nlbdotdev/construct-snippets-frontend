@@ -5,22 +5,28 @@ export const useUser = () => useContext(userContext)
 
 export default function UserProvider({ children }) {
 
-    const userData = {
+    // Login Status
+    const [loggedIn, setLoggedIn] = useState(false)
+    const updateLogIn = (bool) => {
+        setLoggedIn(bool)
+    }
+
+    // User Data
+    const initUserData = {
         id: '',
         username: '',
         email: '',
         firstName: '',
         lastName: '',
     }
-
-    const [user, setUser] = useState(userData)
-
+    const [user, setUser] = useState(initUserData)
     const updateUser = (data) => {
         setUser(data)
     }
 
+    // Return
     return (
-        <userContext.Provider value={{ user, updateUser }}>
+        <userContext.Provider value={{ user, updateUser, loggedIn, updateLogIn }}>
             {children}
         </userContext.Provider>
     )

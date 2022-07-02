@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import { createStyles, Navbar, Group, Code, Text } from '@mantine/core';
-import {
-    BellRinging,
-    Fingerprint,
-    Key,
-    Settings,
-    TwoFA,
-    DatabaseImport,
-    Receipt2,
-    SwitchHorizontal,
-    Logout,
-} from 'tabler-icons-react';
+import { createStyles, Navbar } from '@mantine/core';
+import { Settings, Star, Logout, Login, UserCircle, Home, MathFunction, List, Database, } from 'tabler-icons-react';
 import { Link } from 'react-router-dom';
+import { useUser } from '../context/userContext';
 
+// Styling
 const useStyles = createStyles((theme, _params, getRef) => {
     const icon = getRef('icon');
     return {
@@ -72,22 +64,33 @@ const useStyles = createStyles((theme, _params, getRef) => {
     };
 });
 
-const data = [
-    { link: '/', label: 'Home', icon: BellRinging },
-    { link: '/user', label: 'My Stuff', icon: Receipt2 },
-    { link: '/404', label: 'Favorites', icon: Fingerprint },
-    { link: '/login', label: 'login', icon: Key },
-    { link: '/signup', label: 'signup', icon: DatabaseImport },
-    { link: '/authentication', label: 'access', icon: TwoFA },
-    { link: '', label: 'Other Settings', icon: Settings },
+// Link Array
+const navLinks = [
+    { link: '/', label: 'Home', icon: Home },
+    { link: '/favorites', label: 'Favorites', icon: Star },
+    { link: '/snippets', label: 'Snippets', icon: MathFunction },
+    { link: '/collections', label: 'Collections', icon: List },
+    { link: '/mystuff', label: 'My Stuff', icon: Database },
+    { link: '/settings', label: 'Settings', icon: Settings },
+];
+const navLinksLoggedIn = [
+    { link: '/authentication', label: 'Account', icon: UserCircle },
+    { link: '/authentication', label: 'Logout', icon: Logout },
+];
+
+const navLinksLoggedOut = [
+    { link: '/authentication', label: 'Login', icon: Login },
 ];
 
 export default function NavbarContent({ opened }) {
+
+    // Vars
+    const { loggedIn } = useUser()
     const { classes, cx } = useStyles();
-    const [active, setActive] = useState('Billing');
+    const [active, setActive] = useState('Home');
 
-    const links = data.map((item) => (
-
+    // Converts object to a navbar link
+    const objectToLink = (item) => (
         <Link to={item.link} key={item.label}>
             <div
                 className={cx(classes.link, { [classes.linkActive]: item.label === active })}
@@ -99,7 +102,11 @@ export default function NavbarContent({ opened }) {
                 <span>{item.label}</span>
             </div>
         </Link>
-    ));
+    )
+
+    const links = navLinks.map(item => objectToLink(item))
+    const linksLoggedIn = navLinksLoggedIn.map(item => objectToLink(item))
+    const linksLoggedOut = navLinksLoggedOut.map(item => objectToLink(item))
 
     return (
         <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 350 }} className={classes.navbar}>
@@ -107,17 +114,9 @@ export default function NavbarContent({ opened }) {
                 {links}
             </Navbar.Section>
 
-            {/* Replace w/ username */}
             <Navbar.Section className={classes.footer}>
-                <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
-                    <SwitchHorizontal className={classes.linkIcon} />
-                    <span>Change account</span>
-                </a>
-
-                <a href="#" className={classes.link} onClick={(event) => event.preventDefault()}>
-                    <Logout className={classes.linkIcon} />
-                    <span>Logout</span>
-                </a>
+                {loggedIn && linksLoggedIn}
+                {!loggedIn && linksLoggedOut}
             </Navbar.Section>
         </Navbar>
     );
