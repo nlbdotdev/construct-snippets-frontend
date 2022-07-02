@@ -17,7 +17,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
     const icon = getRef('icon');
     return {
         navbar: {
-            backgroundColor: theme.colors[theme.primaryColor][6],
+            backgroundColor: theme.colors[theme.primaryColor][5],
         },
 
         version: {
