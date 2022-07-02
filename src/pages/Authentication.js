@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { useForm, useToggle, upperFirst } from '@mantine/hooks';
 import {
   TextInput, PasswordInput, Text, Paper,
-  Group, Button, Divider, Checkbox,
-  Anchor, Box, LoadingOverlay, Alert
+  Group, Button, Divider, Checkbox, Stack,
+  Anchor, Box, LoadingOverlay, Alert, MediaQuery
 } from '@mantine/core';
 
 // Other
@@ -114,7 +114,7 @@ export function Authentication(PaperProps) {
   }
 
   return (
-    <Box sx={{ maxWidth: 600 }} mx="auto" style={{ position: 'relative' }}>
+    <Box sx={{ maxWidth: 576 }} mx="auto" style={{ position: 'relative' }}>
 
       <LoadingOverlay visible={loading} />
 
@@ -123,14 +123,35 @@ export function Authentication(PaperProps) {
         // display: 'flex',
         // alignItems: 'center',
       }}>
-        <Text size="lg" weight={500}>
-          Welcome to Construct Snippets, {type} with
-        </Text>
-        <Group grow mb="md" mt="md">
-          <GoogleButton radius="xl">Google</GoogleButton>
-          {/* <TwitterButton radius="xl">Twitter</TwitterButton> */}
-          <GithubButton radius='xl'>Github</GithubButton>
-        </Group>
+
+        {/* Desktop */}
+        <MediaQuery smallerThan="xs" styles={{ display: 'none' }}>
+          <div>
+            <Text size="lg" weight={500}>
+              Welcome to Construct Snippets, {type} with
+            </Text>
+
+            <Group grow mb="lg" mt="md" spacing="xs">
+              <GoogleButton radius="xl" fullwidth>Google</GoogleButton>
+              <GithubButton radius='xl'>Github</GithubButton>
+            </Group>
+          </div>
+        </MediaQuery>
+
+        {/* Mobile */}
+        <MediaQuery largerThan="xs" styles={{ display: 'none' }}>
+          <div>
+            <Text size="lg" weight={500}>
+              Welcome, {type} with
+            </Text>
+
+            <Stack p="md">
+              <GoogleButton radius="xl" fullwidth>Google</GoogleButton>
+              <GithubButton radius='xl'>Github</GithubButton>
+            </Stack>
+          </div>
+        </MediaQuery>
+
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
         <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
           <Group direction="column" grow>
