@@ -15,9 +15,8 @@ import { AlertCircle } from 'tabler-icons-react'
 
 export function Authentication(PaperProps) {
 
-  // Vars from appContext
+  // Vars - appContext
   const { appURL, regex } = useApp()
-
   // Vars
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -40,6 +39,13 @@ export function Authentication(PaperProps) {
     },
   })
 
+  // Toggle form between register and login
+  const toggleForm = () => {
+    setError(false)
+    toggle()
+  }
+
+  // Triggered when the back end rejects POST requests
   const serverError = (error, message) => {
     setLoading(false)
     console.log('Login Error:', error)
@@ -48,7 +54,6 @@ export function Authentication(PaperProps) {
   }
 
   // Form submission with axios and appURL
-  // - could be broken down to functions
   const onSubmit = (data) => {
 
     // Reset vars
@@ -85,7 +90,7 @@ export function Authentication(PaperProps) {
 
     } else if (type === 'register') {
 
-
+      // WORKING HERE
 
     }
   }
@@ -163,7 +168,7 @@ export function Authentication(PaperProps) {
 
           </Group>
           <Group position="apart" mt="xl">
-            <Anchor component="button" type="button" color="gray" onClick={() => toggle()} size="xs">
+            <Anchor component="button" type="button" color="gray" onClick={() => toggleForm()} size="xs">
               {type === 'register'
                 ? 'Already have an account? Login'
                 : "Don't have an account? Register"}
