@@ -27,15 +27,15 @@ export function Authentication(PaperProps) {
   const form = useForm({
     initialValues: {
       email: '',
-      name: '',
+      username: '',
       password: '',
-      terms: true,
+      // terms: true,
     },
     // Validation through mantine form test and appContext regex obj
     validationRules: {
       email: (value) => regex.email.test(value),
       // Need to update pw
-      password: (value) => value.length >= 6,
+      password: (value) => value.length >= 8,
     },
   })
 
@@ -90,8 +90,26 @@ export function Authentication(PaperProps) {
 
     } else if (type === 'register') {
 
-      // WORKING HERE
-
+      axios.post('http://localhost:3001/users/create-user', data)
+        .then(
+          response => {
+            if (response.status === 200) {
+              setLoading(false)
+              console.log('CREATED USER: ', response.data)
+            } else {
+              serverError(error, "Something went wrong, contact support")
+            }
+          }
+        )
+        .catch(error => {
+          if (error.response.data.error) {
+            let errors = Object.values(error.response.data.error)
+            serverError(error, errors.join("\r\n"))
+          }
+          else {
+            serverError(error, "Something went wrong, contact support")
+          }
+        })
     }
   }
 
@@ -131,9 +149,9 @@ export function Authentication(PaperProps) {
                 required
                 label="Username"
                 placeholder="Your username"
-                value={form.values.name}
-                onChange={(event) => form.setFieldValue('name', event.currentTarget.value)}
-                error={form.errors.name && 'Username should include at least 2 characters'}
+                value={form.values.username}
+                onChange={(event) => form.setFieldValue('username', event.currentTarget.value)}
+                error={form.errors.username && 'Username should include at least 2 characters'}
               />
             )}
 
@@ -158,13 +176,13 @@ export function Authentication(PaperProps) {
             />
 
             {/* TOS */}
-            {type === 'register' && (
+            {/* {type === 'register' && (
               <Checkbox
                 label="I accept terms and conditions"
                 checked={form.values.terms}
                 onChange={(event) => form.setFieldValue('terms', event.currentTarget.checked)}
               />
-            )}
+            )} */}
 
           </Group>
           <Group position="apart" mt="xl">

@@ -80,7 +80,6 @@ export default function Login() {
 
             <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
 
-
                 {
                     error &&
                     <Alert icon={<AlertCircle size={32} />} title="Error!" color="red" mt='sm' align="left">
@@ -100,13 +99,10 @@ export default function Login() {
                     placeholder="your password"
                     {...form.getInputProps('password')}
                 />
-
-
-
+                
                 <Group position="right" mt="md">
                     <Button type="submit">Submit</Button>
                 </Group>
-
 
             </form>
 

@@ -9,25 +9,19 @@ import { Authentication } from '../pages/Authentication'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
-import { Group, Center } from '@mantine/core'
-
 
 export default function Content() {
     return (
-      
-        
-                <Routes>
-                    <Route index element={<Home />} />
-                    <Route path="user">
-                        <Route index element={<Login />} />
-                        <Route path="new" element={<Signup />} />
-                    </Route>
-                    <Route path="login" element={<Login />} />
-                    <Route path='signup' element={<Signup /> } />
-                    <Route path='authentication' element={<Authentication />} />
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-          
-       
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path="user">
+                <Route index element={<Login />} />
+                <Route path="new" element={<Signup />} />
+            </Route>
+            <Route path="login" element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+            <Route path='authentication' element={<Authentication />} />
+            <Route path="*" element={<NotFound />} />
+        </Routes>
     )
 }
