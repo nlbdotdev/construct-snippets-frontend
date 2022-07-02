@@ -40,7 +40,12 @@ export function Authentication(PaperProps) {
     },
   })
 
-
+  const serverError = (error, message) => {
+    setLoading(false)
+    console.log('Login Error:', error)
+    setError(true)
+    setErrorMessage(message)
+  }
 
   // Form submission with axios and appURL
   // - could be broken down to functions
@@ -57,33 +62,25 @@ export function Authentication(PaperProps) {
       axios.post(`${appURL}users/login`, data)
         // Login success
         .then(response => {
-          setLoading(false)
           if (response.status === 200) {
+            setLoading(false)
             console.log('SUCCESS: ', response.data)
           } else {
-            console.log('Login Error:', error.response.data)
-            setError(true)
-            setErrorMessage("Something went wrong, contact support")
+            serverError(error.response.data, "Something went wrong, contact support")
           }
         })
         // Login error handling
         .catch(error => {
-          setLoading(false)
-          setError(true)
           if (error.response.data.type === 'nomatch') {
-            setErrorMessage("No user found for this email/password")
+            serverError(error.response.data, "No user found for this email/password")
           } else if (error.response.data.error.email) {
-            setErrorMessage("Email is invalid")
+            serverError(error.response.data, "Email is invalid")
           } else {
-            console.log('Login Error:', error.response.data)
-            setErrorMessage("Something went wrong, contact support")
+            serverError(error.response.data, "Something went wrong, contact support")
           }
         })
         .catch(error => {
-          console.log('Login Error:', error.response.data)
-          setLoading(false)
-          setError(true)
-          setErrorMessage("Could not connect, server may be down.")
+          serverError(error, "Could not connect, server may be down.")
         })
 
     } else if (type === 'register') {
