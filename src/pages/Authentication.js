@@ -9,14 +9,14 @@ import {
 
 // Other
 import { useApp } from '../context/appContext';
-import axios from 'axios';
 import { GoogleButton, TwitterButton, GithubButton } from '../components/SocialButtons.tsx';
 import { AlertCircle } from 'tabler-icons-react'
+import axiosAPI from '../util/axiosAPI';
 
 export function Authentication(PaperProps) {
 
   // Vars - appContext
-  const { appURL, regex } = useApp()
+  const { regex } = useApp()
   // Vars
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -64,7 +64,7 @@ export function Authentication(PaperProps) {
     if (type === 'login') {
 
       // User login route
-      axios.post(`${appURL}users/login`, data)
+      axiosAPI.post('users/login', data)
         // Login success
         .then(response => {
           if (response.status === 200) {
@@ -90,7 +90,8 @@ export function Authentication(PaperProps) {
 
     } else if (type === 'register') {
 
-      axios.post('http://localhost:3001/users/create-user', data)
+      // User registration route
+      axiosAPI.post('/users/create-user', data)
         .then(
           response => {
             if (response.status === 200) {
