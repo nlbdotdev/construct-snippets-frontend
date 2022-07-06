@@ -1,20 +1,23 @@
 import React from 'react'
+import { Photo } from 'tabler-icons-react'
 import TabBar from '../components/TabBar'
+import NotFound from './NotFound'
+
+
 
 const tabs = [
-    { link: '/', label: 'All' },
-    { link: '/functions', label: 'Functions' },
-    { link: '/2', label: 'Tab 3' },
-    { link: '/', label: 'Tab 4' },
-    { link: '/', label: 'Tab 5' },
+    { label: 'All', value: 'all', color: 'red', content: <NotFound/>,},
+    { label: 'Functions', value: 'functions',  color: 'blue', icon: <Photo size={14}/>, content: 'YEET' },
+    { label: 'Tab 3', value: 'tab3',  color: 'green',  disabled: true  },
 ]
 
 
 export default function MyStuff() {
     return (
         <div>
-            <TabBar tabs={tabs} />
+            <TabBar tabData={tabs} />
             <h1>My Stuff</h1>
         </div>
     )
 }
+
