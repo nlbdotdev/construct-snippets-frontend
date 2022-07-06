@@ -13,7 +13,7 @@ import { GoogleButton, TwitterButton, GithubButton } from '../components/SocialB
 import { AlertCircle } from 'tabler-icons-react'
 import axiosAPI from '../util/axiosAPI';
 
-export function Authentication(PaperProps) {
+export default function Authentication(PaperProps) {
 
   // Vars - appContext
   const { regex } = useApp()

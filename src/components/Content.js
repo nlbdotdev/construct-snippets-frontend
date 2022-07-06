@@ -5,10 +5,12 @@ import Signup from "../pages/Signup"
 import Login from "../pages/Login"
 import Home from '../pages/Home'
 import NotFound from '../pages/NotFound'
-import { Authentication } from '../pages/Authentication'
+import MyStuff from '../pages/MyStuff'
+import Authentication from '../pages/Authentication'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
+
 
 export default function Content() {
     return (
@@ -20,6 +22,7 @@ export default function Content() {
             </Route>
             <Route path="login" element={<Login />} />
             <Route path='signup' element={<Signup />} />
+            <Route path='mystuff' element={<MyStuff />} />
             <Route path='authentication' element={<Authentication />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
