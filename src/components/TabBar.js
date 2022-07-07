@@ -1,7 +1,5 @@
 import React from 'react'
 import { Tabs, SegmentedControl, ThemeIcon, Center, Box } from '@mantine/core';
-import { Photo, MessageCircle, Settings, } from 'tabler-icons-react';
-
 
 export default function TabBar(props) {
 
@@ -12,7 +10,7 @@ export default function TabBar(props) {
   const buildTabs = (tabArray) => {
 
     let elems = tabArray.map(data => (
-      <Tabs.Tab label={data.label} value={data.value} color={data.color} icon={data.icon} disabled={data.disabled}>
+      <Tabs.Tab key={data.label} label={data.label} value={data.value} color={data.color} icon={data.icon} disabled={data.disabled}>
         {data.content}
       </Tabs.Tab>
     ))
@@ -20,37 +18,35 @@ export default function TabBar(props) {
     return elems
   }
 
+  // Accepts array of tab objects, return SegmentedControl data prop
+  const buildSegments = (tabArray) => {
+
+    let elems = tabArray.map(data => (
+      {
+        label: data.label,
+        value: data.value,
+        disabled: data.disabled
+      }
+    ))
+
+    return elems
+  }
 
   // Build components
   const tabElements = buildTabs(tabData)
-
-
+  const segmentData = buildSegments(tabData)
 
   return (
     <div>
       <h4>Tab Bar</h4>
-
-      {/* {props.tabs[0].label} */}
 
 
       <Tabs grow orientation="horizontal">
         {tabElements}
       </Tabs>
 
-      {/* <SegmentedControl fullWidth orientation="vertical"
-        data={data}
-      /> */}
-
-
-
       <SegmentedControl fullWidth orientation="vertical"
-        data={[
-          { label: 'React', value: 'react' },
-          { label: 'Angular', value: 'ng', disabled: true },
-          { label: 'Vue', value: 'vue', backgroundColor: 'green' },
-          { label: 'Svelte', value: 'svelte' },
-
-        ]}
+        data={segmentData}
       />
 
 
