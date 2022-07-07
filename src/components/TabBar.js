@@ -1,11 +1,11 @@
-// ++++ Add icons to segmented tabs
 import React, { useState } from 'react'
-import { Tabs, SegmentedControl, ThemeIcon, Center, Box } from '@mantine/core';
+import { Tabs, SegmentedControl, Center, Box } from '@mantine/core';
 
 // The TabBar component builds responsive navigation tabs based on passed props using mantine components
-// On large displays, Tabs is used
-// On small displays, SegmentedControl is used
+// On large displays, Tabs is used exclusively
+// On small displays, SegmentedControl is used exclusively
 // Display changing with Tabs is included with the component, so all data can just be passed into the childrens (Tabs.Tab). SegmentedControl is a bit more involved and needs to be controlled
+
 export default function TabBar(props) {
 
   // Destructure data from props
@@ -33,10 +33,14 @@ export default function TabBar(props) {
 
     let elems = tabArray.map(data => (
       {
-        label: data.label,
+        label: (
+          <Center>
+            {data.icon}
+            <Box ml={10}>{data.label}</Box>
+          </Center>
+        ),
         value: data.value,
         disabled: data.disabled,
-        content: 'yeet'
       }
     ))
 
