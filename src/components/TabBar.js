@@ -1,3 +1,4 @@
+// ++++ Add icons to segmented tabs
 import React, { useState } from 'react'
 import { Tabs, SegmentedControl, ThemeIcon, Center, Box } from '@mantine/core';
 
@@ -5,12 +6,10 @@ import { Tabs, SegmentedControl, ThemeIcon, Center, Box } from '@mantine/core';
 // On large displays, Tabs is used
 // On small displays, SegmentedControl is used
 // Display changing with Tabs is included with the component, so all data can just be passed into the childrens (Tabs.Tab). SegmentedControl is a bit more involved and needs to be controlled
-
 export default function TabBar(props) {
 
-
   // Destructure data from props
-  const { tabData } = props
+  const { tabData, tabInit } = props
 
   // Returns content for the current segment, pulling from tabData
   const getSegmentContent = (value) => {
@@ -18,10 +17,10 @@ export default function TabBar(props) {
     return tab.content
   }
 
-  // ***Should pass in default tab as prop
   // Segment Hooks
-  const [currentSegment, setCurrentSegment] = useState('functions')
-  const [segmentContent, setSegmentContent] = useState(getSegmentContent('all'))
+  const initSegmentValue = tabData[tabInit].value
+  const [currentSegment, setCurrentSegment] = useState(initSegmentValue)
+  const [segmentContent, setSegmentContent] = useState(getSegmentContent(initSegmentValue))
 
   // Controlled segment function, updates segment and content
   const changeSegment = (value) => {
@@ -66,7 +65,7 @@ export default function TabBar(props) {
 
       {/* Need to make responsivly show one or the other */}
 
-      <Tabs grow orientation="horizontal">
+      <Tabs grow orientation="horizontal" initialTab={tabInit}>
         {tabElements}
       </Tabs>
 
