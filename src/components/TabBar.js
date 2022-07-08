@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Tabs, SegmentedControl, Center, Box, MediaQuery } from '@mantine/core';
 
+// +++ Need to refactor Tabs to use controlled component like SegmentedControl, so that aside content is not re-rendered
+
 // The TabBar component builds responsive navigation tabs based on passed props using mantine components
 // On large displays, Tabs is used exclusively
 // On small displays, SegmentedControl is used exclusively
