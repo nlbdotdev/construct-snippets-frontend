@@ -13,7 +13,7 @@ export default function TabPage(props) {
     return (
         <div>
             {/* Large Display */}
-            <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+            <MediaQuery smallerThan="md" styles={{ display: 'none' }}>
                 <Group align="flex-start">
                     <div style={{ flex: 2 }}>{main}</div>
                     <div style={{ flex: 1 }}>{aside}</div>
@@ -21,7 +21,7 @@ export default function TabPage(props) {
             </MediaQuery>
 
             {/* Mobile Display */}
-            <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+            <MediaQuery largerThan="md" styles={{ display: 'none' }}>
                 <Stack py='md'>
                     {aside}
                     {main}

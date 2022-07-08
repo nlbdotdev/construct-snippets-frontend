@@ -36,8 +36,8 @@ export default function SnippetsGrid() {
     <SimpleGrid
       cols={3}
       breakpoints={[
-        { maxWidth: 1400, cols: 2, spacing: 'sm' },
-        { maxWidth: 1020, cols: 1, spacing: 'sm' },
+        { maxWidth: 'xl', cols: 2, spacing: 'sm' },
+        { maxWidth: 'xs', cols: 1, spacing: 'sm' },
       ]}
 
     >
