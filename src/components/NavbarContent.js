@@ -109,7 +109,7 @@ export default function NavbarContent({ opened }) {
     const linksLoggedOut = navLinksLoggedOut.map(item => objectToLink(item))
 
     return (
-        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 300, lg: 350 }} className={classes.navbar}>
+        <Navbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 250, lg: 300 }} className={classes.navbar}>
             <Navbar.Section grow>
                 {links}
             </Navbar.Section>
