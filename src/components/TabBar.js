@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Tabs, SegmentedControl, Center, Box } from '@mantine/core';
+import { Tabs, SegmentedControl, Center, Box, MediaQuery } from '@mantine/core';
 
 // The TabBar component builds responsive navigation tabs based on passed props using mantine components
 // On large displays, Tabs is used exclusively
@@ -65,26 +65,26 @@ export default function TabBar(props) {
 
   return (
     <div>
-      <h4>Tab Bar</h4>
+      {/* Large Display */}
+      <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+        <Tabs grow orientation="horizontal" initialTab={tabInit}>
+          {tabElements}
+        </Tabs>
+      </MediaQuery>
 
-      {/* Need to make responsivly show one or the other */}
-
-      <Tabs grow orientation="horizontal" initialTab={tabInit}>
-        {tabElements}
-      </Tabs>
-
-      {/* Mobile */}
-
-      <SegmentedControl
-        fullWidth
-        orientation="vertical"
-        value={currentSegment}
-        onChange={e => changeSegment(e)}
-        data={segmentData}
-      />
-
-      {segmentContent}
-
+      {/* Mobile Display */}
+      <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
+        <div>
+          <SegmentedControl
+            fullWidth
+            orientation="vertical"
+            value={currentSegment}
+            onChange={e => changeSegment(e)}
+            data={segmentData}
+          />
+          {segmentContent}
+        </div>
+      </MediaQuery>
     </div>
   )
 }

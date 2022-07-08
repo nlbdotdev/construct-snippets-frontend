@@ -13,8 +13,8 @@ const tabs = [
 export default function MyStuff() {
     return (
         <div>
-            <TabBar tabData={tabs} tabInit={0} />
             <h1>My Stuff</h1>
+            <TabBar tabData={tabs} tabInit={0} />
         </div>
     )
 }
