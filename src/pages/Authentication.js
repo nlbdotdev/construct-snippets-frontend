@@ -7,16 +7,20 @@ import {
   Anchor, Box, LoadingOverlay, Alert, MediaQuery
 } from '@mantine/core';
 
-// Other
+// Context
+import { useUser } from '../context/userContext';
 import { useApp } from '../context/appContext';
+
 import { GoogleButton, TwitterButton, GithubButton } from '../components/SocialButtons.tsx';
 import { AlertCircle } from 'tabler-icons-react'
 import axiosAPI from '../util/axiosAPI';
 
 export default function Authentication(PaperProps) {
 
-  // Vars - appContext
+  // Context
   const { regex } = useApp()
+  const { loggedIn, updateLogin, updateUser } = useUser()
+
   // Vars
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -70,6 +74,16 @@ export default function Authentication(PaperProps) {
           if (response.status === 200) {
             setLoading(false)
             console.log('SUCCESS: ', response.data)
+
+            const payload = response.data.payload
+
+
+            // WORKING HERE
+            // Move to function and add redirect
+            updateLogin(true)
+            updateUser(payload)
+      
+
           } else {
             serverError(error.response.data, "Something went wrong, contact support")
           }

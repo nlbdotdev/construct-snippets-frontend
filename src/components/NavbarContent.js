@@ -64,30 +64,29 @@ const useStyles = createStyles((theme, _params, getRef) => {
     };
 });
 
-// Link Array
-const navLinks = [
-    { link: '/', label: 'Home', icon: Home },
-    { link: '/favorites', label: 'Favorites', icon: Star },
-    { link: '/snippets', label: 'Snippets', icon: MathFunction },
-    { link: '/collections', label: 'Collections', icon: List },
-    { link: '/mystuff', label: 'My Stuff', icon: Database },
-    { link: '/settings', label: 'Settings', icon: Settings },
-];
-const navLinksLoggedIn = [
-    { link: '/authentication', label: 'Account', icon: UserCircle },
-    { link: '/authentication', label: 'Logout', icon: Logout },
-];
-
-const navLinksLoggedOut = [
-    { link: '/authentication', label: 'Login', icon: Login },
-];
-
 export default function NavbarContent({ opened }) {
 
     // Vars
-    const { loggedIn } = useUser()
+    const { loggedIn, user } = useUser()
     const { classes, cx } = useStyles();
     const [active, setActive] = useState('Home');
+
+    // Link Arrays
+    const navLinks = [
+        { link: '/', label: 'Home', icon: Home },
+        { link: '/favorites', label: 'Favorites', icon: Star },
+        { link: '/snippets', label: 'Snippets', icon: MathFunction },
+        { link: '/collections', label: 'Collections', icon: List },
+        { link: '/mystuff', label: 'My Stuff', icon: Database },
+        { link: '/settings', label: 'Settings', icon: Settings },
+    ];
+    const navLinksLoggedIn = [
+        { link: '/account', label: user.username, icon: UserCircle },
+        { link: '/logout', label: 'Logout', icon: Logout },
+    ];
+    const navLinksLoggedOut = [
+        { link: '/authentication', label: 'Login', icon: Login },
+    ];
 
     // Converts object to a navbar link
     const objectToLink = (item) => (

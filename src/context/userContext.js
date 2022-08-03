@@ -7,7 +7,7 @@ export default function UserProvider({ children }) {
 
     // Login Status
     const [loggedIn, setLoggedIn] = useState(false)
-    const updateLogIn = (bool) => {
+    const updateLogin = (bool) => {
         setLoggedIn(bool)
     }
 
@@ -26,7 +26,7 @@ export default function UserProvider({ children }) {
 
     // Return
     return (
-        <userContext.Provider value={{ user, updateUser, loggedIn, updateLogIn }}>
+        <userContext.Provider value={{ user, updateUser, loggedIn, updateLogin }}>
             {children}
         </userContext.Provider>
     )
