@@ -7,6 +7,7 @@ import Home from '../pages/Home'
 import NotFound from '../pages/NotFound'
 import MyStuff from '../pages/MyStuff'
 import Authentication from '../pages/Authentication'
+import Account from '../pages/Account'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
@@ -27,6 +28,7 @@ export default function Content() {
                 <Route path='signup' element={<Signup />} />
                 <Route path='mystuff' element={<MyStuff />} />
                 <Route path='authentication' element={<Authentication />} />
+                <Route path='account' element={<Account />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Container>
