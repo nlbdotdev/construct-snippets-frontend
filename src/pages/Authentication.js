@@ -19,7 +19,7 @@ export default function Authentication(PaperProps) {
 
   // Context
   const { regex } = useApp()
-  const { loggedIn, updateLogin, updateUser } = useUser()
+  let { loggedIn, updateLogin, updateUser } = useUser()
 
   // Vars
   const [loading, setLoading] = useState(false)

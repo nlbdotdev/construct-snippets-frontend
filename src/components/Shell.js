@@ -1,19 +1,51 @@
-import React, { useState } from 'react';
-import {
-  AppShell,
-  Navbar,
-  Header,
-  MediaQuery,
-  Burger,
-  useMantineTheme,
-} from '@mantine/core';
+// Core
+import React, { useState, useEffect } from 'react';
+import { AppShell, Header, MediaQuery, Burger, useMantineTheme, } from '@mantine/core';
 
 // Content
 import NavbarContent from './NavbarContent';
 import HeaderContent from './HeaderContent';
 import Content from './Content';
 
+// Sesion
+import axiosAPI from "../util/axiosAPI";
+import { useUser } from '../context/userContext';
+
 export default function Shell() {
+
+  // If current session is invalid, reset react states managed by local storage
+  let { loggedIn, resetUser } = useUser()
+  async function validateSession() {
+    // Check if user session cookie is valid
+    const session = await
+      axiosAPI.get('users/auth')
+        .then(response => {
+          if (response.status === 200) {
+            // console.log('SUCCESS: ', response.data)
+            return true;
+          } else {
+            // console.log('Auth Error')
+            return false;
+          }
+        })
+        .catch(error => {
+          // console.log('Auth Error:', error)
+          return false;
+        })
+
+    // Reset localStorage and userContext
+    // console.log('session', session)
+    if (!session && loggedIn) {
+      localStorage.clear()
+      resetUser()
+    }
+
+  }
+  // Only check on page refresh
+  useEffect(() => {
+    validateSession()
+  }, [])
+
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (

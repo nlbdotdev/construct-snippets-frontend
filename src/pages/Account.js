@@ -6,6 +6,9 @@ import { Text, Paper, Group, Button, Divider, Stack, Box } from '@mantine/core';
 import { useUser } from '../context/userContext';
 import NeedLogin from '../components/NeedLogin';
 
+
+// Consider componetizing log in page to a wrapper
+
 export default function Account() {
 
     const { user, loggedIn } = useUser()
@@ -16,7 +19,6 @@ export default function Account() {
                 <Box sx={{ maxWidth: 576 }} mx="auto" style={{ position: 'relative' }}>
                     <Paper radius="md" p="xl" shadow='md' withBorder >
 
-
                         <Stack>
                             <Text size="lg" weight={500}>
                                 Hello, {user.username}
@@ -24,8 +26,8 @@ export default function Account() {
 
                             <Divider labelPosition="center" my="sm" />
 
-                            <Text align="left">Username: {user.username}.</Text>
-                            <Text align="left">Email: {user.email}</Text>
+                            <Text align="left"><strong>Username:</strong> {user.username}</Text>
+                            <Text align="left"><strong>Email:</strong> {user.email}</Text>
 
                             <Divider labelPosition="center" my="sm" />
 
@@ -33,8 +35,6 @@ export default function Account() {
                                 <Button type="submit" >Sign Out</Button>
                             </Group>
                         </Stack>
-
-
 
                     </Paper>
                 </Box>
