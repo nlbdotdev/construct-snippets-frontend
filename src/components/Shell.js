@@ -33,6 +33,7 @@ export default function Shell() {
           return false;
         })
 
+    // consider redirecting to logout page instead
     // Reset localStorage and userContext
     // console.log('session', session)
     if (!session && loggedIn) {

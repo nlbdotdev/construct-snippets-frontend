@@ -11,9 +11,7 @@ import NeedLogin from '../components/NeedLogin';
 export default function Account() {
 
     const { user, loggedIn, logout } = useUser()
-
-
-
+    
     return (
         <div>
             {loggedIn &&
@@ -33,7 +31,7 @@ export default function Account() {
                             <Divider labelPosition="center" my="sm" />
 
                             <Group>
-                                <Button type="submit" onClick={  e =>   logout()}>Sign Out</Button>
+                                <Button type="submit" onClick={e => logout()}>Sign Out</Button>
                             </Group>
                         </Stack>
 
