@@ -1,10 +1,15 @@
 import React, { createContext, useContext, useState } from 'react'
 import { loadItem, setItem } from '../util/localStorage'
 
+import { useNavigate } from 'react-router-dom'
+
 export const userContext = createContext()
 export const useUser = () => useContext(userContext)
 
 export default function UserProvider({ children }) {
+
+    let navigate = useNavigate()
+
 
     // Login Status
     const [loggedIn, setLoggedIn] = useState(loadItem('loggedIn', false))
@@ -33,9 +38,24 @@ export default function UserProvider({ children }) {
         updateUser(initUserData)
     }
 
+    // Logout
+    const logout = () => {
+        setTimeout(() => {
+
+            // Clear session
+            localStorage.clear()
+            resetUser()
+            document.cookie = 'session_token=; Max-Age=0; path=/;'
+
+            // Go home
+            navigate('/')
+
+        }, 150)
+    }
+
     // Return
     return (
-        <userContext.Provider value={{ user, updateUser, loggedIn, updateLogin, resetUser }}>
+        <userContext.Provider value={{ user, updateUser, loggedIn, updateLogin, resetUser, logout }}>
             {children}
         </userContext.Provider>
     )

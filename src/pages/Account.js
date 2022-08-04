@@ -6,12 +6,13 @@ import { Text, Paper, Group, Button, Divider, Stack, Box } from '@mantine/core';
 import { useUser } from '../context/userContext';
 import NeedLogin from '../components/NeedLogin';
 
-
 // Consider componetizing log in page to a wrapper
 
 export default function Account() {
 
-    const { user, loggedIn } = useUser()
+    const { user, loggedIn, logout } = useUser()
+
+
 
     return (
         <div>
@@ -32,7 +33,7 @@ export default function Account() {
                             <Divider labelPosition="center" my="sm" />
 
                             <Group>
-                                <Button type="submit" >Sign Out</Button>
+                                <Button type="submit" onClick={  e =>   logout()}>Sign Out</Button>
                             </Group>
                         </Stack>
 
