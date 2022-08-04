@@ -7,8 +7,24 @@ import { MantineProvider, AppShell, Text } from '@mantine/core'
 // Components
 import Shell from "./components/Shell";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useEffect } from "react";
+
+
+
 
 function App() {
+
+
+// On page refresh, check if token is still valid
+// If not, clear local storage and state
+
+  // First Log In
+  useEffect(() => {
+    console.log('use effect')
+  
+  }, [])
+
+
   return (
     <Router>
       <MantineProvider

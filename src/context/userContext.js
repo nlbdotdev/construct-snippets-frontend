@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
+import { loadItem, setItem } from '../util/localStorage'
 
 export const userContext = createContext()
 export const useUser = () => useContext(userContext)
@@ -6,22 +7,24 @@ export const useUser = () => useContext(userContext)
 export default function UserProvider({ children }) {
 
     // Login Status
-    const [loggedIn, setLoggedIn] = useState(false)
-    const updateLogin = (bool) => {
+    const [loggedIn, setLoggedIn] = useState(loadItem('loggedIn', false))
+    const updateLogin = (bool) => { 
         setLoggedIn(bool)
-    }
+        setItem('loggedIn', bool)
+     }
 
     // User Data
     const initUserData = {
         id: '',
         username: '',
         email: '',
-        firstName: '',
-        lastName: '',
+        firstName: 'fff',
+        lastName: 'xx',
     }
-    const [user, setUser] = useState(initUserData)
+    const [user, setUser] = useState(loadItem('userData', initUserData))
     const updateUser = (data) => {
         setUser(data)
+        setItem('userData', data)
     }
 
     // Return
