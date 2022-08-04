@@ -5,13 +5,14 @@ import { Text, Paper, Group, Button, Divider, Stack, Box } from '@mantine/core';
 // Context
 import { useUser } from '../context/userContext';
 import NeedLogin from '../components/NeedLogin';
+import { useNavigate } from 'react-router-dom';
 
 // Consider componetizing log in page to a wrapper
-
 export default function Account() {
 
-    const { user, loggedIn, logout } = useUser()
-    
+    const { user, loggedIn } = useUser()
+    const navigate = useNavigate()
+
     return (
         <div>
             {loggedIn &&
@@ -31,7 +32,7 @@ export default function Account() {
                             <Divider labelPosition="center" my="sm" />
 
                             <Group>
-                                <Button type="submit" onClick={e => logout()}>Sign Out</Button>
+                                <Button type="submit" onClick={e => navigate('/logout')}>Sign Out</Button>
                             </Group>
                         </Stack>
 

@@ -1,7 +1,6 @@
 // Core
 import React, { useState, useEffect } from 'react';
 import { AppShell, Header, MediaQuery, Burger, useMantineTheme, } from '@mantine/core';
-
 // Content
 import NavbarContent from './NavbarContent';
 import HeaderContent from './HeaderContent';
@@ -10,11 +9,15 @@ import Content from './Content';
 // Sesion
 import axiosAPI from "../util/axiosAPI";
 import { useUser } from '../context/userContext';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Shell() {
 
   // If current session is invalid, reset react states managed by local storage
-  let { loggedIn, resetUser } = useUser()
+  let { loggedIn } = useUser()
+  let navigate = useNavigate()
+
   async function validateSession() {
     // Check if user session cookie is valid
     const session = await
@@ -33,14 +36,11 @@ export default function Shell() {
           return false;
         })
 
-    // consider redirecting to logout page instead
-    // Reset localStorage and userContext
+    // Redirecting to logout page
     // console.log('session', session)
     if (!session && loggedIn) {
-      localStorage.clear()
-      resetUser()
+      navigate('/logout')
     }
-
   }
   // Only check on page refresh
   useEffect(() => {
