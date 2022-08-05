@@ -3,7 +3,6 @@ import UserProvider from "./context/userContext";
 import AppProvider from "./context/appContext";
 import { MantineProvider, AppShell, Text } from '@mantine/core'
 
-
 // Components
 import Shell from "./components/Shell";
 import { BrowserRouter as Router } from "react-router-dom";

@@ -1,5 +1,5 @@
 // Core
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Text, Paper, Group, Button, Divider, Stack, Box } from '@mantine/core';
 
 // Context

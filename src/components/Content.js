@@ -12,9 +12,7 @@ import Logout from '../pages/Logout'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
-
 import { Container } from '@mantine/core'
-
 
 export default function Content() {
     return (

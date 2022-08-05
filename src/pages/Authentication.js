@@ -6,6 +6,7 @@ import {
   Group, Button, Divider, Checkbox, Stack,
   Anchor, Box, LoadingOverlay, Alert, MediaQuery
 } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 // Context
 import { useUser } from '../context/userContext';
@@ -19,13 +20,21 @@ export default function Authentication(PaperProps) {
 
   // Context
   const { regex } = useApp()
-  let { loggedIn, updateLogin, updateUser } = useUser()
+  let { updateLogin, updateUser } = useUser()
 
   // Vars
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [type, toggle] = useToggle('login', ['login', 'register'])
+
+  // Functions
+  const navigate = useNavigate()
+  const login = (payload) => {
+    updateLogin(true)
+    updateUser(payload)
+    navigate('/account')
+  }
 
   // Form
   const form = useForm({
@@ -74,16 +83,8 @@ export default function Authentication(PaperProps) {
           if (response.status === 200) {
             setLoading(false)
             console.log('SUCCESS: ', response.data)
-
             const payload = response.data.payload
-
-
-            // WORKING HERE
-            // Move to function and add redirect
-            updateLogin(true)
-            updateUser(payload)
-      
-
+            login(payload)
           } else {
             serverError(error.response.data, "Something went wrong, contact support")
           }

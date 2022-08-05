@@ -11,7 +11,6 @@ import axiosAPI from "../util/axiosAPI";
 import { useUser } from '../context/userContext';
 import { useNavigate } from 'react-router-dom';
 
-
 export default function Shell() {
 
   // If current session is invalid, reset react states managed by local storage
