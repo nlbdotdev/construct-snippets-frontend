@@ -1,21 +1,21 @@
 // Core
 import React from 'react'
 import { Text, Paper, Group, Button, Divider, Stack, Box } from '@mantine/core';
+import AuthWrapper from '../components/AuthWrapper';
 
 // Context
 import { useUser } from '../context/userContext';
-import NeedLogin from '../components/NeedLogin';
 import { useNavigate } from 'react-router-dom';
 
 // Consider componetizing log in page to a wrapper
 export default function Account() {
 
-    const { user, loggedIn } = useUser()
+    const { user } = useUser()
     const navigate = useNavigate()
 
     return (
-        <div>
-            {loggedIn &&
+        <AuthWrapper
+            content={
                 <Box sx={{ maxWidth: 576 }} mx="auto" style={{ position: 'relative' }}>
                     <Paper radius="md" p="xl" shadow='md' withBorder >
 
@@ -39,10 +39,6 @@ export default function Account() {
                     </Paper>
                 </Box>
             }
-
-            {!loggedIn &&
-                <NeedLogin />
-            }
-        </div>
+        />
     )
 }
