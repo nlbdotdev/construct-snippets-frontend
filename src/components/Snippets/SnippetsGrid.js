@@ -1,4 +1,6 @@
-import { SimpleGrid, Card, Badge, Text, Group, useMantineTheme, Image, Button, Stack } from '@mantine/core'
+import { SimpleGrid, Card, Badge, Text, Group, useMantineTheme, Image, Button, Stack, Center } from '@mantine/core'
+import { Settings, Star, Copy, MathFunction, List, Database, Download } from 'tabler-icons-react';
+
 import React from 'react'
 
 const data = [
@@ -26,7 +28,12 @@ export default function SnippetsGrid() {
 
     <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
       <Stack>
-        ICON
+        {/* <Center> */}
+        <MathFunction
+          size={36}
+        />
+        {/* </Center> */}
+
       </Stack>
 
       <Stack>
@@ -35,20 +42,42 @@ export default function SnippetsGrid() {
         <Text weight={500}>{item.title}</Text>
         <Group>
 
-          X {item.rating}
-          V {item.downloads}
+          <Star size={24} />
+          {item.rating}
+
+          <Download size={24} />
+
+          {item.downloads}
         </Group>
 
       </Stack>
     </Group>
 
-    <Stack>
-    </Stack>
 
 
     <Text size="sm" align='left'>Author: {item.author}</Text>
     <Text size="sm" align='left'>Updated: {item.updated}</Text>
     <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
+
+
+
+    {/* <Group position='right'>
+
+
+      <CopyButton value="content copied">
+        <Copy size={24} />
+
+      </CopyButton> </Group>
+
+    <CopyButton value="https://mantine.dev" timeout={2000}>
+      {({ copied, copy }) => (
+        <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
+          <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
+            {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
+          </ActionIcon>
+        </Tooltip>
+      )}
+    </CopyButton> */}
 
 
     {/* <Text size="sm">
