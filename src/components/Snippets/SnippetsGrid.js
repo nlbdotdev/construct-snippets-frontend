@@ -1,5 +1,5 @@
-import { SimpleGrid, Card, Badge, Text, Group, useMantineTheme, Image, Button, Stack, Center } from '@mantine/core'
-import { Settings, Star, Copy, MathFunction, List, Database, Download } from 'tabler-icons-react';
+import { SimpleGrid, Container, Card, Text, Group, useMantineTheme, Button, Stack, Center, ActionIcon, Box } from '@mantine/core'
+import { Star, Copy, MathFunction, Download, CirclePlus } from 'tabler-icons-react';
 
 import React from 'react'
 
@@ -24,78 +24,73 @@ export default function SnippetsGrid() {
   const theme = useMantineTheme()
   let item = data[0]
 
-  const testCard = <Card shadow="sm" p="lg">
+  const testCard =
+    <Card shadow="sm" p="lg">
 
-    <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
-      <Stack>
-        {/* <Center> */}
-        <MathFunction
-          size={36}
-        />
-        {/* </Center> */}
+      {/* Top */}
+      <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
+        <Stack>
+          <Container
+            size="xs" p="xs"
+            sx={(theme) => ({
+              backgroundColor: theme.colors.gray[3],
+              borderRadius: '100px',
+            })}
+          >
+            <MathFunction
+              size={32}
+            />
+          </Container>
+        </Stack>
 
+        <Stack spacing='xs'>
+
+          <Group>
+            <Text weight={500}>{item.title}</Text>
+          </Group>
+
+          <Group>
+            <Group spacing='5px'>
+              <Star size={24} />
+              {item.rating}
+            </Group>
+
+            <Group spacing='5px'>
+              <Download size={24} />
+              {item.downloads}
+            </Group>
+          </Group>
+
+        </Stack>
+      </Group>
+
+
+      {/* Body */}
+      <Stack spacing='0' my='md'>
+        <Text size="sm" align='left'>Author: {item.author}</Text>
+        <Text size="sm" align='left'>Updated: {item.updated}</Text>
+        <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
       </Stack>
 
-      <Stack>
+      {/* Bottom */}
+      <Group position='right'>
+        <Button>
+          <Copy size={24} />
+        </Button>
+      </Group>
 
+    </Card>
 
-        <Text weight={500}>{item.title}</Text>
-        <Group>
+  const newCard =
+    <Card shadow="sm" p="lg"
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
 
-          <Star size={24} />
-          {item.rating}
+      <ActionIcon size="xxl" radius="lg">
+        <CirclePlus size={96} strokeWidth={2} />
+      </ActionIcon>
 
-          <Download size={24} />
+    </Card>
 
-          {item.downloads}
-        </Group>
-
-      </Stack>
-    </Group>
-
-
-
-    <Text size="sm" align='left'>Author: {item.author}</Text>
-    <Text size="sm" align='left'>Updated: {item.updated}</Text>
-    <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
-
-
-
-    {/* <Group position='right'>
-
-
-      <CopyButton value="content copied">
-        <Copy size={24} />
-
-      </CopyButton> </Group>
-
-    <CopyButton value="https://mantine.dev" timeout={2000}>
-      {({ copied, copy }) => (
-        <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
-          <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>
-            {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
-          </ActionIcon>
-        </Tooltip>
-      )}
-    </CopyButton> */}
-
-
-    {/* <Text size="sm">
-      With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-      activities on and around the fjords of Norway
-    </Text>
-
-    <Button variant="light" color="blue" fullWidth style={{ marginTop: 14 }}>
-      Book classic tour now
-    </Button>
-
-    <Badge color="pink" variant="light">
-      On Sale
-    </Badge> */}
-
-
-
-  </Card>
 
   return (
     <SimpleGrid
@@ -104,9 +99,9 @@ export default function SnippetsGrid() {
         { maxWidth: 'xl', cols: 2, spacing: 'sm' },
         { maxWidth: 'xs', cols: 1, spacing: 'sm' },
       ]}
-
     >
 
+      {newCard}
       {testCard}
       {testCard}
       {testCard}
