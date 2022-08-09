@@ -26,7 +26,6 @@ export default function SnippetsGrid() {
   let item = data[0]
 
   const testCard =
-
     <Card shadow="sm" p="lg"
       onClick={() => console.log('card pressed')}
       sx={(theme) => ({
@@ -72,17 +71,12 @@ export default function SnippetsGrid() {
       </Group>
 
       {/* Body */}
-
-
       <Text size="md" align='left' my='sm' lineClamp={3}>{item.desc}</Text>
-
       <Stack spacing='0' my='md'>
         <Text size="sm" align='left'>Author: {item.author}</Text>
         <Text size="sm" align='left'>Updated: {item.updated}</Text>
         <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
       </Stack>
-
-
 
       {/* Bottom */}
       <Group position='right'>
@@ -101,27 +95,19 @@ export default function SnippetsGrid() {
 
   const newCard =
     <Card shadow="sm" p="lg"
-
       onClick={() => console.log('new card pressed')}
       sx={(theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // '&:hover': {
-        //   backgroundColor: theme.colors.gray[1],
-        //   cursor: 'pointer',
-        // },
+        '&:hover': {
+          backgroundColor: theme.colors.gray[1],
+          cursor: 'pointer',
+        },
       })}
     >
-
-      <ActionIcon size="xxl" radius="lg">
-        <CirclePlus size={96} strokeWidth={2} />
-      </ActionIcon>
-
+      <CirclePlus size={96} strokeWidth={2} />
     </Card>
-
-
-
 
   return (
     <SimpleGrid
@@ -141,7 +127,7 @@ export default function SnippetsGrid() {
       {testCard}
       {testCard}
       {testCard}
-
+      
     </SimpleGrid>
   )
 }
