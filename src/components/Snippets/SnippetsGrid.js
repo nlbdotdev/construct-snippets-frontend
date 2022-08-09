@@ -27,34 +27,26 @@ export default function SnippetsGrid() {
   const testCard =
 
     <Card shadow="sm" p="lg"
-    // component="a"
-    // href="https://mantine.dev"
-    // target="_blank"
-    // sx={(theme) => ({
-    //   '&:hover': {
-    //     backgroundColor: theme.colors.gray[1],
-    //     cursor: 'pointer',
-    //   },
-    // })}
+    
     >
-      <Stack
 
-        spacing="0" m="0" p="0"
+      <UnstyledButton 
+      onClick={() => console.log('try focusing button with tab')}
+       spacing="0" m="0" p="0"
         radius="120px"
+        border="xl"
         sx={(theme) => ({
           '&:hover': {
             backgroundColor: theme.colors.gray[1],
             cursor: 'pointer',
           },
         })}
-      >
-
-
-
       
+      
+      >
         {/* Top */}
         <Group
-          position="apart"
+          position="left"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
           <Stack>
             <Container
@@ -85,16 +77,13 @@ export default function SnippetsGrid() {
             </Group>
           </Stack>
         </Group>
-
         {/* Body */}
         <Stack spacing='0' my='md'>
           <Text size="sm" align='left'>Author: {item.author}</Text>
           <Text size="sm" align='left'>Updated: {item.updated}</Text>
           <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
         </Stack>
-
-      </Stack>
-
+      </UnstyledButton>
 
 
       {/* Bottom */}
