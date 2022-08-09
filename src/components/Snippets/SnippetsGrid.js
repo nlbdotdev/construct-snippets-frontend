@@ -13,8 +13,9 @@ const data = [
     uploaded: '6/10/22',
     type: 'function',
     tags: ['money', 'essential', 'strings'],
-    desc: 'This is my description',
-    clipboard: `{"is-c3-clipboard-data":true,"type":"events","items":[{"functionName":"Function1","functionDescription":"","functionCategory":"","functionReturnType":"none","functionIsAsync":false,"functionParameters":[],"eventType":"function-block","conditions":[],"actions":[{"id":"log","objectClass":"Browser","parameters":{"type":"log","message":"\"hello\""}}]}]}`
+    desc: 'Convert a number into a currency formated string. Accepts custom symbols. More text here that will be cut off because the description is too long.',
+    // Will need to escape escape chars, should do so algorithmically
+    clipboard: `{"is-c3-clipboard-data":true,"type":"events","items":[{"functionName":"Function8","functionDescription":"","functionCategory":"","functionReturnType":"none","functionIsAsync":false,"functionParameters":[],"eventType":"function-block","conditions":[],"actions":[{"id":"log","objectClass":"Browser","parameters":{"type":"log","message":"\\"hello\\""}}]}]}`
   }
 ]
 
@@ -71,11 +72,17 @@ export default function SnippetsGrid() {
       </Group>
 
       {/* Body */}
+
+
+      <Text size="md" align='left' my='sm' lineClamp={3}>{item.desc}</Text>
+
       <Stack spacing='0' my='md'>
         <Text size="sm" align='left'>Author: {item.author}</Text>
         <Text size="sm" align='left'>Updated: {item.updated}</Text>
         <Text size="sm" align='left'>Uploaded: {item.uploaded}</Text>
       </Stack>
+
+
 
       {/* Bottom */}
       <Group position='right'>
