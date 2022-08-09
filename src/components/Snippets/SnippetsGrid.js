@@ -1,4 +1,4 @@
-import { SimpleGrid, Card, Badge, Text, Group, useMantineTheme, Image, Button, Stack, Center } from '@mantine/core'
+import { SimpleGrid, Card, Badge, Text, Group, useMantineTheme, Image, Button, Stack, Center, CopyButton } from '@mantine/core'
 import { Settings, Star, Copy, MathFunction, List, Database, Download } from 'tabler-icons-react';
 
 import React from 'react'
@@ -67,9 +67,9 @@ export default function SnippetsGrid() {
       <CopyButton value="content copied">
         <Copy size={24} />
 
-      </CopyButton> </Group>
+      </CopyButton> </Group> */}
 
-    <CopyButton value="https://mantine.dev" timeout={2000}>
+    {/* <CopyButton value="https://mantine.dev" timeout={2000}>
       {({ copied, copy }) => (
         <Tooltip label={copied ? 'Copied' : 'Copy'} withArrow position="right">
           <ActionIcon color={copied ? 'teal' : 'gray'} onClick={copy}>

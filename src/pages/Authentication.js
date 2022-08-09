@@ -1,6 +1,7 @@
 // Core
 import React, { useState } from 'react'
-import { useForm, useToggle, upperFirst } from '@mantine/hooks';
+import { useToggle, upperFirst } from '@mantine/hooks';
+import { useForm } from '@mantine/form';
 import {
   TextInput, PasswordInput, Text, Paper,
   Group, Button, Divider, Checkbox, Stack,
@@ -26,7 +27,7 @@ export default function Authentication(PaperProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
-  const [type, toggle] = useToggle('login', ['login', 'register'])
+  const [type, toggle] = useToggle(['login', 'register'])
 
   // Functions
   const navigate = useNavigate()
@@ -132,7 +133,10 @@ export default function Authentication(PaperProps) {
   return (
     <Box sx={{ maxWidth: 576 }} mx="auto" style={{ position: 'relative' }}>
 
-      <LoadingOverlay visible={loading} />
+      <LoadingOverlay
+        visible={loading}
+        loaderProps={{ color: 'blue' }}
+      />
 
       <Paper radius="md" p="xl" shadow='md' withBorder {...PaperProps} sx={{
         // maxWidth: 600,
@@ -170,7 +174,7 @@ export default function Authentication(PaperProps) {
 
         <Divider label="Or continue with email" labelPosition="center" my="lg" />
         <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
-          <Group direction="column" grow>
+          <Stack>
 
             {/* ERROR */}
             {
@@ -221,7 +225,7 @@ export default function Authentication(PaperProps) {
               />
             )} */}
 
-          </Group>
+          </Stack>
           <Group position="apart" mt="xl">
             <Anchor component="button" type="button" color="gray" onClick={() => toggleForm()} size="xs">
               {type === 'register'
