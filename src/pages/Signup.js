@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosAPI from "../util/axiosAPI";
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -15,7 +15,7 @@ export default function Signup() {
   const onSubmit = data => {
     console.log(data);
 
-    axios.post('http://localhost:3001/users/create-user', data)
+    axiosAPI.post('/users/create-user', data)
       .then(
         // if status code
         response => {
