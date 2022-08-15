@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-console.log('environment:', process.env.REACT_APP_AXIOS)
+// console.log('environment:', process.env.REACT_APP_AXIOS)
 
 // add env vars to change to local or hosted
 const axiosAPI = axios.create({
