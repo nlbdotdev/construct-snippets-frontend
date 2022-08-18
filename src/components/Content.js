@@ -9,6 +9,7 @@ import MyStuff from '../pages/MyStuff'
 import Authentication from '../pages/Authentication'
 import Account from '../pages/Account'
 import Logout from '../pages/Logout'
+import NewSnippet from '../pages/NewSnippet'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
@@ -29,6 +30,7 @@ export default function Content() {
                 <Route path='authentication' element={<Authentication />} />
                 <Route path='account' element={<Account />} />
                 <Route path='logout' element={<Logout />} />
+                <Route path='new' element={<NewSnippet />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Container>

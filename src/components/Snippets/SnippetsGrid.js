@@ -1,5 +1,7 @@
 import { SimpleGrid, Container, Card, Text, Group, useMantineTheme, Button, Stack, Center, ActionIcon, UnstyledButton, Box } from '@mantine/core'
 import { Star, Copy, MathFunction, Download, CirclePlus } from 'tabler-icons-react';
+import { Link } from 'react-router-dom';
+
 
 import React from 'react'
 
@@ -106,7 +108,9 @@ export default function SnippetsGrid() {
         },
       })}
     >
-      <CirclePlus size={96} strokeWidth={2} />
+      <Link to={'/new'} key={'new'}>
+        <CirclePlus size={96} strokeWidth={2} />
+      </Link>
     </Card>
 
   return (
@@ -127,7 +131,7 @@ export default function SnippetsGrid() {
       {testCard}
       {testCard}
       {testCard}
-      
+
     </SimpleGrid>
   )
 }
