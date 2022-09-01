@@ -1,18 +1,11 @@
 import { TextInput, Button, Group, Box, Textarea, LoadingOverlay, Alert, Select, MultiSelect, Paper } from '@mantine/core';
 
-import axios from 'axios';
+// import axios from 'axios';
+import axiosAPI from '../../util/axiosAPI';
 import { AlertCircle } from 'tabler-icons-react'
 import React, { useState } from 'react'
 import { useForm } from '@mantine/form';
 import { useApp } from '../../context/appContext';
-
-
-
-// title
-// type (enum)
-// desc
-// clipboard
-// tags
 
 const tags = [
     { value: 'math', label: 'Math' },
@@ -20,9 +13,8 @@ const tags = [
     { value: 'utility', label: 'Utility' },
 ];
 
+
 export default function SnippetForm() {
-
-
 
     // Can just import directly, don't need context?
     // Vars from appContext
@@ -40,7 +32,7 @@ export default function SnippetForm() {
             type: 'function',
             desc: '',
             clipboard: '',
-            tags: '',
+            tags: [],
         },
     });
 
@@ -51,54 +43,37 @@ export default function SnippetForm() {
         console.log('submit data:', data)
 
         // Reset login vars
-        // setLoading(true)
-        // setError(false)
-        // setErrorMessage('')
+        setLoading(true)
+        setError(false)
+        setErrorMessage('')
 
         // User login route
-        // axios.post(`${appURL}users/login`, data)
-        //     // Login success
-        //     .then(response => {
-        //         setLoading(false)
-        //         if (response.status === 200) {
-        //             console.log('SUCCESS: ', response.data)
-        //         } else {
-        //             console.log('Login Error:', error.response.data)
-        //             setError(true)
-        //             setErrorMessage("Something went wrong, contact support")
-        //         }
-        //     }
-        //     )
-        //     // Login error handling
-        //     .catch(error => {
-        //         setLoading(false)
-        //         setError(true)
-        //         if (error.response.data.type === 'nomatch') {
-        //             setErrorMessage("No user found for this email/password")
-        //         } else if (error.response.data.error.email) {
-        //             setErrorMessage("Email is invalid")
-        //         } else {
-        //             console.log('Login Error:', error.response.data)
-        //             setErrorMessage("Something went wrong, contact support")
-        //         }
-        //     })
+        axiosAPI.post(`snippets/create-snippet`, data)
+            // Login success
+            .then(response => {
+                setLoading(false)
+                if (response.status === 200) {
+                    console.log('SUCCESS: ', response.data)
+                } else {
+                    console.log('Login Error:', error.response.data)
+                    setError(true)
+                    setErrorMessage("Something went wrong, contact support")
+                }
+            }
+            )
+            // Login error handling
+            .catch(error => {
+                setLoading(false)
+                setError(true)
+               
+                    console.log('Login Error:', error.response.data)
+                    setErrorMessage("Something went wrong, contact support")
+                
+            })
     }
-
-
 
     return (
         <div>
-
-
-            {/* <Box sx={{ maxWidth: 576 }} mx="auto" style={{ position: 'relative' }}> */}
-
-            {/* <LoadingOverlay visible={loading} /> */}
-
-            {/* <Paper radius="md" p="xl" shadow='md' withBorder {...PaperProps} sx={{
-  // maxWidth: 600,
-  // display: 'flex',
-  // alignItems: 'center',
-}}> */}
             <Box sx={{ maxWidth: 600 }} mx="auto">
 
                 <h1>New Snippet</h1>
@@ -112,6 +87,7 @@ export default function SnippetForm() {
                             {errorMessage}
                         </Alert>
                     }
+
                     <TextInput
                         required
                         label="Title"
@@ -120,7 +96,7 @@ export default function SnippetForm() {
                     />
 
                     <Select
-                    required
+                        required
                         label="Type"
                         placeholder="Pick one"
                         data={[
@@ -150,23 +126,12 @@ export default function SnippetForm() {
                         placeholder="Clipboard from Construct 3"
                         {...form.getInputProps('clipboard')}
                     />
-
-
-
-
-
-
                     <Group position="right" mt="md">
                         <Button type="submit">Submit</Button>
                     </Group>
 
                 </form>
-
             </Box>
-
-
         </div >
-
     )
-
 }
