@@ -1,6 +1,5 @@
 import React from 'react'
 import { Photo } from 'tabler-icons-react'
-import AuthWrapper from '../components/AuthWrapper'
 import SnippetsFilter from '../components/Snippets/SnippetsFilter'
 import SnippetsGrid from '../components/Snippets/SnippetsGrid'
 import TabBar from '../components/TabBar'
@@ -22,11 +21,6 @@ const tabs = [
 
 export default function MyStuff() {
     return (
-
-        <AuthWrapper content={
-            <TabBar tabData={tabs} tabInit={0} />
-        }
-        />
-
+        <TabBar tabData={tabs} tabInit={0} />
     )
 }
