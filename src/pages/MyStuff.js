@@ -7,7 +7,7 @@ import TabBar from '../components/TabBar'
 import TabPage from '../components/TabPage'
 import NotFound from './NotFound'
 
-const pageAll = <TabPage main={<SnippetsGrid />} aside={<SnippetsFilter />} />
+const pageAll = <TabPage main={<SnippetsGrid view="mine" />} aside={<SnippetsFilter />} />
 
 const pageOther = <TabPage main="main page" aside={<SnippetsFilter />} />
 
