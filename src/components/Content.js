@@ -10,6 +10,8 @@ import Authentication from '../pages/Authentication'
 import Account from '../pages/Account'
 import Logout from '../pages/Logout'
 import NewSnippet from '../pages/NewSnippet'
+import ComingSoon from '../pages/ComingSoon'
+import Snippets from '../pages/Snippets'
 
 // Router
 import { Route, Routes } from 'react-router-dom'
@@ -26,6 +28,10 @@ export default function Content() {
                 </Route>
                 <Route path="login" element={<Login />} />
                 <Route path='signup' element={<Signup />} />
+                <Route path='favorites' element={<ComingSoon />} />
+                <Route path='collections' element={<ComingSoon />} />
+                <Route path='settings' element={<ComingSoon />} />
+                <Route path='snippets' element={<Snippets />} />
                 <Route path='mystuff' element={<MyStuff />} />
                 <Route path='authentication' element={<Authentication />} />
                 <Route path='account' element={<Account />} />
