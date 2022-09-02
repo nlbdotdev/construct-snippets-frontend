@@ -1,11 +1,11 @@
 import { TextInput, Button, Group, Box, Textarea, LoadingOverlay, Alert, Select, MultiSelect, Paper } from '@mantine/core';
 
-// import axios from 'axios';
 import axiosAPI from '../../util/axiosAPI';
 import { AlertCircle } from 'tabler-icons-react'
 import React, { useState } from 'react'
 import { useForm } from '@mantine/form';
 import { useApp } from '../../context/appContext';
+import { useNavigate } from 'react-router-dom';
 
 const tags = [
     { value: 'math', label: 'Math' },
@@ -18,7 +18,9 @@ export default function SnippetForm() {
 
     // Can just import directly, don't need context?
     // Vars from appContext
+    // Hooks
     const { appURL, regex } = useApp()
+    const navigate = useNavigate()
 
     // Login vars
     const [loading, setLoading] = useState(false)
@@ -54,8 +56,9 @@ export default function SnippetForm() {
                 setLoading(false)
                 if (response.status === 200) {
                     console.log('SUCCESS: ', response.data)
+                    navigate('/mystuff')
                 } else {
-                    console.log('Login Error:', error.response.data)
+                    console.log('Submit Error:', error.response.data)
                     setError(true)
                     setErrorMessage("Something went wrong, contact support")
                 }
@@ -65,10 +68,13 @@ export default function SnippetForm() {
             .catch(error => {
                 setLoading(false)
                 setError(true)
-               
-                    console.log('Login Error:', error.response.data)
+                console.log('Submit Error:', error.response.data)
+                if (error.response.data.error.code === 11000) {
+                    setErrorMessage("Title must unique")
+                } else {
                     setErrorMessage("Something went wrong, contact support")
-                
+
+                }
             })
     }
 
