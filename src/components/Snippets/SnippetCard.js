@@ -22,15 +22,7 @@ export default function SnippetCard(props) {
 
   const { snippet } = props
   const theme = useMantineTheme()
-
-  const timeStamp = '2022-09-01T22:29:49.812Z'
-  const yeet = snippet.createdAt
-  let equals = timeStamp === yeet
-
-  console.log('timestamp', timeStamp)
-  console.log('yeet', yeet)
-  console.log('equals', equals)
-
+  
   return (
     <div>
       <Card shadow="sm" p="lg"
